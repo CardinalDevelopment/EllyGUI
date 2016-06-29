@@ -1,7 +1,7 @@
 package ee.ellytr.gui.slot.listener;
 
 import ee.ellytr.gui.ClickListener;
-import ee.ellytr.gui.EllyGUI;
+import ee.ellytr.gui.GUI;
 import ee.ellytr.gui.slot.PageSlot;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
@@ -10,7 +10,7 @@ import org.bukkit.entity.Player;
 @RequiredArgsConstructor
 public class PageSlotListener extends ClickListener {
 
-  private final EllyGUI gui;
+  private final GUI gui;
   private final PageSlot.PageSlotType type;
 
   @Override
