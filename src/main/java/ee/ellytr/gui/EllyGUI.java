@@ -1,5 +1,6 @@
 package ee.ellytr.gui;
 
+import ee.ellytr.chat.LocaleRegistry;
 import lombok.Getter;
 import lombok.NonNull;
 import org.bukkit.Bukkit;
@@ -12,6 +13,7 @@ import org.bukkit.plugin.Plugin;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 public class EllyGUI implements Listener {
 
@@ -22,6 +24,10 @@ public class EllyGUI implements Listener {
 
   public EllyGUI(@NonNull Plugin plugin) {
     Bukkit.getPluginManager().registerEvents(this, plugin);
+
+    LocaleRegistry registry = new LocaleRegistry();
+    registry.addLocaleFile(new Locale("en", "US"), EllyGUI.class.getResourceAsStream("/lang/gui/en_US.properties"));
+    registry.register();
   }
 
   public void addGUI(@NonNull GUI gui) {
