@@ -24,7 +24,7 @@ dependencies {
     compile 'org.bukkit:bukkit:1.8.8-R0.1-SNAPSHOT'
     compile 'org.projectlombok:lombok:1.16.8'
 
-    shade 'ee.ellytr.chat:EllyChat:1.2.4'
+    shade 'ee.ellytr.chat:EllyChat:1.2.5'
 }
 
 jar {
