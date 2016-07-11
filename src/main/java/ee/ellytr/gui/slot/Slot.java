@@ -1,7 +1,7 @@
 package ee.ellytr.gui.slot;
 
 import ee.ellytr.chat.component.LanguageComponent;
-import ee.ellytr.gui.ClickListener;
+import ee.ellytr.gui.SlotListener;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
@@ -18,6 +18,6 @@ public class Slot {
   private List<LanguageComponent> lore;
 
   private ItemStack item;
-  private ClickListener listener;
+  private SlotListener listener;
 
 }

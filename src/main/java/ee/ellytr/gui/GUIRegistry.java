@@ -15,26 +15,26 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
-public class EllyGUI implements Listener {
+public class GUIRegistry implements Listener {
 
   @Getter
-  private static EllyGUI instance;
+  private static GUIRegistry instance;
 
   private final List<GUI> guis = new ArrayList<>();
 
-  public EllyGUI(@NonNull Plugin plugin) {
+  public GUIRegistry(@NonNull Plugin plugin) {
     Bukkit.getPluginManager().registerEvents(this, plugin);
 
     LocaleRegistry registry = new LocaleRegistry();
-    registry.addLocaleFile(new Locale("en", "US"), EllyGUI.class.getResourceAsStream("/lang/gui/en_US.properties"));
+    registry.addLocaleFile(new Locale("en", "US"), GUIRegistry.class.getResourceAsStream("/lang/gui/en_US.properties"));
     registry.register();
   }
 
-  public void addGUI(@NonNull GUI gui) {
+  public void registerGUI(@NonNull GUI gui) {
     guis.add(gui);
   }
 
-  public void removeGUI(@NonNull GUI gui) {
+  public void unregisterGUI(@NonNull GUI gui) {
     guis.remove(gui);
   }
 
@@ -45,7 +45,7 @@ public class EllyGUI implements Listener {
     if (gui != null) {
       int position = event.getRawSlot();
       if (position < gui.getSize()) {
-        gui.click(player, position);
+        gui.click(position, player, event.getClick());
         event.setCancelled(true);
       }
     }
