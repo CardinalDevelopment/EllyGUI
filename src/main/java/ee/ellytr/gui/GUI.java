@@ -115,6 +115,24 @@ public class GUI {
     }
   }
 
+  public Slot getSlotAt(int position) {
+    for (GUIContext<Slot> context : slots) {
+      if (context.getPosition() == position) {
+        return context.getNode();
+      }
+    }
+    return null;
+  }
+
+  public SlotGroup getSlotGroupAt(int position) {
+    for (GUIContext<SlotGroup> context : slotGroups) {
+      if (context.getPosition() == position) {
+        return context.getNode();
+      }
+    }
+    return null;
+  }
+
   private void updatePage(int page) {
     int position = page * size;
     if (page != 1) {
