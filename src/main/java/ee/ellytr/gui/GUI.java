@@ -4,7 +4,6 @@ import ee.ellytr.chat.ChatConstant;
 import ee.ellytr.chat.component.LanguageComponent;
 import ee.ellytr.chat.component.builder.LocalizedComponentBuilder;
 import ee.ellytr.chat.component.builder.UnlocalizedComponentBuilder;
-import ee.ellytr.chat.util.ChatUtil;
 import ee.ellytr.gui.slot.PageSlot;
 import ee.ellytr.gui.slot.Slot;
 import ee.ellytr.gui.slot.SlotGroup;
@@ -256,10 +255,12 @@ public class GUI {
     openInventory(player, currentPage + 1, locales.get(player));
   }
 
-  public void update(@NonNull Locale locale) {
+  public void update() {
     for (Player player : opened.keySet()) {
       Inventory inventory = player.getOpenInventory().getTopInventory();
       Map<Integer, Slot> slots = inventories.get(opened.get(player)).getSlots();
+      Locale locale = locales.get(player);
+
       for (int position = 0; position < inventory.getSize(); position++) {
         if (slots.containsKey(position)) {
           Slot slot = slots.get(position);
