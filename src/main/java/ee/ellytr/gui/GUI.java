@@ -133,7 +133,7 @@ public class GUI {
     return null;
   }
 
-  private void updatePage(int page) {
+  public void updatePage(int page) {
     int position = page * size;
     if (page != 1) {
       slots.add(new GUIContext<>(new PageSlot(this, PageSlot.PageSlotType.PREVIOUS), position - 9, false));
@@ -218,11 +218,11 @@ public class GUI {
     return inventory;
   }
 
-  private int getPage(int position) {
+  public int getPage(int position) {
     return (position / size) + 1;
   }
 
-  private int getPages() {
+  public int getPages() {
     int maxPages = 0;
     for (GUIContext<Slot> context : slots) {
       int pages = getPage(context.getPosition());
