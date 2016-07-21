@@ -4,6 +4,7 @@ import ee.ellytr.chat.ChatConstant;
 import ee.ellytr.chat.component.LanguageComponent;
 import ee.ellytr.chat.component.builder.LocalizedComponentBuilder;
 import ee.ellytr.chat.component.builder.UnlocalizedComponentBuilder;
+import ee.ellytr.chat.util.ChatUtil;
 import ee.ellytr.gui.slot.PageSlot;
 import ee.ellytr.gui.slot.Slot;
 import ee.ellytr.gui.slot.SlotGroup;
@@ -255,12 +256,27 @@ public class GUI {
     openInventory(player, currentPage + 1, locales.get(player));
   }
 
-  public void update() {
+  public void update(@NonNull Locale locale) {
     for (Player player : opened.keySet()) {
       Inventory inventory = player.getOpenInventory().getTopInventory();
       Map<Integer, Slot> slots = inventories.get(opened.get(player)).getSlots();
       for (int position = 0; position < inventory.getSize(); position++) {
         if (slots.containsKey(position)) {
+          Slot slot = slots.get(position);
+          ItemStack item = slot.getItem();
+          LanguageComponent name = slot.getName();
+          List<LanguageComponent> lore = slot.getLore();
+          if (name != null || lore != null) {
+            ItemMeta meta = item.getItemMeta();
+            if (name != null) {
+              meta.setDisplayName(Components.compress(name.getComponents(locale)).toLegacyText());
+            }
+            if (lore != null) {
+              meta.setLore(lore.stream().map(component
+                  -> Components.compress(component.getComponents(locale)).toLegacyText()).collect(Collectors.toList()));
+            }
+            item.setItemMeta(meta);
+          }
           inventory.setItem(position, slots.get(position).getItem());
         } else {
           inventory.setItem(position, null);
